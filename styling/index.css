@@ -3,3 +3,30 @@
     padding: 0;
     background-color: antiquewhite;
 }
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#board{
+    background-color: rgb(255, 255, 156);
+    height: 90vh;
+    width: 50vw;
+
+    border: 2px solid black;
+    display: grid;
+    grid-template-columns: repeat(18,1fr);
+    grid-template-rows: repeat(18,1fr);
+}   
+
+.head{
+    background-color: darkgreen;
+}
+.body{
+    background-color: lightgreen;
+}
+.food{
+    background-color: red;
+}
