@@ -21,12 +21,19 @@
     grid-template-rows: repeat(18,1fr);
 }   
 
+
 .head{
-    background-color: darkgreen;
+    background-color:  linear-gradient(  rgba(9,9,121,1) , rgba(0,212,255,1) );
+    border: 1px solid transparent;
+    border-radius: 7px;
 }
 .body{
     background-color: lightgreen;
+    border: .25vmin solid transparent;
+    border-radius: 13px;
 }
 .food{
-    background-color: red;
+    background-color: linear-gradient(  rgba(9,9,121,1) , rgba(0,212,255,1) ) ;
+    border: 2px solid black;
+    border-radius: 7px;
 }
