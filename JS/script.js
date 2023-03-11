@@ -2,10 +2,11 @@ console.log("ruunnin");
 
 // game constants
 let changeDirect={x:0,y:0};
-const moveSound = new Audio('../turning.mp3');
-const foodsound=new Audio("../eating.mp3")
+const bgSound= new Audio('../bgsound.mp3');
+const foodsound = new Audio('../turning.mp3');
+const turningsound=new Audio("../eating.mp3")
 const gameover = new Audio('../gameover.mp3');
-const speed=10;
+let speed=6;
 let score=0; 
 let lastPaintTime = 0;
 
@@ -37,6 +38,7 @@ function isCollide(snakebody){
 // writing the logic of how game runs
 const gameEngine=()=>
 {
+    
     //task 1. displaying the snake and food
     
         //1.1 rendering snake
@@ -66,15 +68,17 @@ const gameEngine=()=>
     board.appendChild(foodElement);
     
     
-    // task 2. updating position of snake array and food
-//game over 
+    // task 2. game over
     if (isCollide(snakebody)) {
-        gameover.play();
+        bgSound.pause();
+        
         alert("gameover! press enter to play again");
         snakebody=[
             {x:13, y:16},
         ]; 
-        changeDirect={x:0,y:0}  
+        changeDirect={x:0,y:0}  ;
+        speed=6
+        bgSound.pause();
     }
 
     
@@ -82,7 +86,7 @@ const gameEngine=()=>
     //task 3: condition of food eaten
     if (snakebody[0].x==food.x && snakebody[0].y==food.y) {
         foodsound.play();
-        console.log("eaten")
+        // console.log("eaten");
 
         //increasing lenght of snake
         snakebody.unshift({x:snakebody[0].x+changeDirect.x,y:snakebody[0].y+changeDirect.y})
@@ -92,6 +96,14 @@ const gameEngine=()=>
         let b = 16;
         food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())}
         //I know the logic, I have copied this from internet
+
+    //task 4:incresing the speed of snake each time the food is eaten
+        if (speed<13) {
+            speed=speed+1;
+        } else {
+            speed=speed+0.5;
+        }
+        // console.log(speed);
     }
 
     //moving the snake
@@ -110,10 +122,12 @@ const gameEngine=()=>
 window.requestAnimationFrame(main);
 
 window.addEventListener("keydown",(e)=>{
-    moveSound.play();
+    turningsound.play();
+    bgSound.play();
+    bgSound.volume=0.13;
     changeDirect={x:0,y:1}//initial position of snake
 
-    console.log(e.key);
+    // console.log(e.key);//to check which key is pressed
     //this is funcking good. I can know which key is pressed
     //I can use this for changing direction of my snake 
 
