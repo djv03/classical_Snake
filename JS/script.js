@@ -1,6 +1,7 @@
 console.log("ruunnin");
 
 // game constants
+
 let changeDirect={x:0,y:0};
 const bgSound= new Audio('../bgsound.mp3');
 const foodsound = new Audio('../turning.mp3');
@@ -38,6 +39,7 @@ function isCollide(snakebody){
 // writing the logic of how game runs
 const gameEngine=()=>
 {
+    document.getElementById('score').innerHTML=`your score is:${score}`;
     
     //task 1. displaying the snake and food
     
@@ -77,8 +79,11 @@ const gameEngine=()=>
             {x:13, y:16},
         ]; 
         changeDirect={x:0,y:0}  ;
-        speed=6
+        speed=6;
+        score=0;
         bgSound.pause();
+
+       
     }
 
     
@@ -86,7 +91,7 @@ const gameEngine=()=>
     //task 3: condition of food eaten
     if (snakebody[0].x==food.x && snakebody[0].y==food.y) {
         foodsound.play();
-        // console.log("eaten");
+        console.log("eaten");
 
         //increasing lenght of snake
         snakebody.unshift({x:snakebody[0].x+changeDirect.x,y:snakebody[0].y+changeDirect.y})
@@ -104,6 +109,14 @@ const gameEngine=()=>
             speed=speed+0.5;
         }
         // console.log(speed);
+
+    //task: increasing score
+    score=score+1;
+    if (score>hiscoreval) {
+        hiscoreval=score;
+        localStorage.setItem("highScore", JSON.stringify(hiscoreval));
+        highscoreBox.innerHTML = "HighScore: " + hiscoreval;
+    }
     }
 
     //moving the snake
@@ -120,6 +133,17 @@ const gameEngine=()=>
 // function implemantation: main logic
 
 window.requestAnimationFrame(main);
+
+let hiscore = localStorage.getItem("hiscore");
+if(hiscore === null){
+    hiscoreval = 0;
+    localStorage.setItem("hiscore", JSON.stringify(hiscoreval))
+}
+else{
+    hiscoreval = JSON.parse(hiscore);
+    document.getElementById('highscoreBox').innerHTML = "HiScore: " + hiscore;
+}
+
 
 window.addEventListener("keydown",(e)=>{
     turningsound.play();

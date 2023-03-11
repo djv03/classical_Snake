@@ -6,6 +6,7 @@
 
 .container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -35,5 +36,20 @@
 .food{
     background-color: red ;
     border: 1px solid black;
-    border-radius: 7px;
+    border-radius: 23px;
+}
+
+#score{
+    padding: 33px;
+    position: absolute;
+    font-size: 2rem;
+    font-weight: bold;
+    right: 0;
+}
+#highscoreBox{
+    padding: 33px;
+    position: absolute;
+    font-size: 2rem;
+    font-weight: bold;
+    left: 0;
 }
